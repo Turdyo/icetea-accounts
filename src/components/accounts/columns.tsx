@@ -3,6 +3,8 @@
 import { Prisma } from "@prisma/client"
 import { ColumnDef } from "@tanstack/react-table"
 import dayjs from "dayjs"
+import relativeTime from "dayjs/plugin/relativeTime"
+import "dayjs/locale/fr"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -17,6 +19,8 @@ import { useState } from "react"
 import { toast } from "sonner"
 import { coypToClipboard } from "@/lib/utils"
 import Link from "next/link"
+
+dayjs.extend(relativeTime)
 
 export type Row = Prisma.CompteGetPayload<{
   select: {
@@ -106,7 +110,7 @@ export const columns: ColumnDef<Row>[] = [
     accessorKey: "lastTimeTaken",
     header: "Dernière utilisation",
     cell: ({ row }) => (
-      <div>{dayjs(row.getValue("lastTimeTaken")).format("DD/MM, H[h]mm")}</div>
+      <div>{dayjs(row.getValue("lastTimeTaken")).locale("fr").fromNow()}</div>
     ),
   },
   {
