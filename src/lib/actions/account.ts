@@ -30,3 +30,15 @@ export async function deleteAccount(id: string) {
   })
   revalidatePath("/")
 }
+
+export async function updateLatestUse(id: string) {
+  await db.compte.update({
+    where: {
+      id,
+    },
+    data: {
+      lastTimeTaken: new Date(),
+    },
+  })
+  revalidatePath("/")
+}

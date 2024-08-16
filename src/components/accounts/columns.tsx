@@ -12,7 +12,7 @@ import {
 } from "../ui/dropdown-menu"
 import { Button } from "../ui/button"
 import { Copy, ExternalLink, MoreHorizontal } from "lucide-react"
-import { deleteAccount } from "@/lib/actions/account"
+import { deleteAccount, updateLatestUse } from "@/lib/actions/account"
 import { useState } from "react"
 import { toast } from "sonner"
 import { coypToClipboard } from "@/lib/utils"
@@ -94,6 +94,7 @@ export const columns: ColumnDef<Row>[] = [
             toast("Copied", {
               position: "bottom-center",
             })
+            updateLatestUse(row.original.id)
           }}
         >
           {hasCopied ? "Copied!" : "Copy Password"}
@@ -105,7 +106,7 @@ export const columns: ColumnDef<Row>[] = [
     accessorKey: "lastTimeTaken",
     header: "Dernière utilisation",
     cell: ({ row }) => (
-      <div>{dayjs(row.getValue("lastTimeTaken")).format("DD/MM, hh[h]mm")}</div>
+      <div>{dayjs(row.getValue("lastTimeTaken")).format("DD/MM, H[h]mm")}</div>
     ),
   },
   {
