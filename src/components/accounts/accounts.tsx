@@ -22,7 +22,7 @@ export default async function AccountDataTable() {
   })
 
   return (
-    <div className="container mx-auto flex flex-col gap-6 py-10">
+    <div className="container mx-auto flex flex-col gap-6">
       <CreateAccountDialog />
       <DataTable columns={columns} data={data} />
     </div>
